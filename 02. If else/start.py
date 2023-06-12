@@ -1,64 +1,129 @@
-'''Task 1
-Користувач вводить із клавіатури три числа. Залежно від вибору користувача програма виводить на екран
-суму трьох чисел або добуток трьох чисел.'''
+# import random
+# number = int(input("Enter day number: "))
+# # number = random.randint(1, 7)
+# if number == 1:
+#     print("It's Monday.")
+# elif number == 5:
+#     print("It's Friday.")
+# else:
+#     print("ERROR!")
+'''Користувач вводить із клавіатури два числа. Необхідно знайти суму чисел, різницю чисел, добуток чисел. Результат обчислень вивести на екран.'''
 
-# num1 = int(input("Enter the first number: "))
-# num2 = int(input("Enter the second number: "))
-# num3 = int(input("Enter the third number: "))
-# operation = input("Enter an operation ('+' or '*'): ")
+# number1 = int(input("Enter the first number: "))
+# number2 = int(input("Enter the second number: "))
+
+# print("Plus = ", number1 + number2, "Minus = ", number1 - number2, "Multipl = ", number1 * number2, "Division = ", number1 / number2)
+
+
+
+'''Користувач вводить із клавіатури два числа. Необхідно знайти максимум із двох чисел і вивести його на екран.'''
+
+# number1 = int(input("Enter the first number: "))
+# number2 = int(input("Enter the second number: "))
+
+# if number1 > number2:
+#     print(f"{number1}")
+# elif number1 < number2:
+#     print(f"{number2} ")
+# elif number1 == number2:
+#     print("It's the same numbers.")
+
+
+
+
+
+'''Користувач вводить із клавіатури два числа. Необхідно знайти мінімум із двох чисел і вивести його на екран.'''
+
+# number1 = int(input("Enter the first number: "))
+# number2 = int(input("Enter the second number: "))
+
+# if number1 < number2:
+#     print(f"{number1}")
+# elif number1 > number2:
+#     print(f"{number2} ")
+# elif number1 == number2:
+#     print("It's the same numbers.")
+
+
+
+
+'''Користувач вводить із клавіатури два числа.
+ Залежно від вибору користувача потрібно показати суму двох чисел, різницю двох чисел, середньоарифметичне або добуток двох чисел.'''
+
+# number1 = int(input("Enter the first number: "))
+# number2 = int(input("Enter the second number: "))
+# operation = input("Enter an operation: ")
 # result = 0
 # if operation == '+':
-#     result = num1 + num2 + num3
-#     print(f"{num1} + {num2} + {num3} = {result}")
+#     result = number1 + number2
+#     print(f"{number1} + {number2} = {result}")
+# elif operation == '-':
+#     result = number1 - number2
+#     print(f"{number1} - {number2} = {result}")
 # elif operation == '*':
-#     result = num1 * num2 * num3
-#     print(f"{num1} * {num2} * {num3} = {result}")
+#     result = number1 * number2
+#     print(f"{number1} * {number2} = {result}")
+# elif operation == '/':
+#     result = number1 / number2
+#     print(f"{number1} / {number2} = {result}")
+# elif operation == 'average':
+#     floatResult = float(result)
+#     result = (number1 + number2) / 2
+#     print(f"Average = {result}")
 
-# ------------------------------------------------------
+'''Користувач вводить із клавіатури довжину лінії. Потрібно відобразити на екрані горизонтальну лінію з * , вказаної довжини.
 
-'''Task 2
-Користувач вводить із клавіатури три числа. Залежно від вибору користувача програма виводить на екран 
-максимум із трьох, мінімум із трьох або середньоарифметичне трьох чисел.'''
+Наприклад, якщо було введено 7, тоді виведення на екран буде таким'''
 
-# num1 = int(input("Enter the first number: "))
-# num2 = int(input("Enter the second number: "))
-# num3 = int(input("Enter the third number: "))
-# operation = input("Enter an operation ('max', 'min' or 'avg'): ")
+# number = int(input("Enter the number: "))
+# if number == 1:
+#     print("*")
+# elif number == 2:
+#     print("**")
+# elif number == 3:
+#     print("***")
+# elif number == 4:
+#     print("****")
+# elif number == 5:
+#     print("*****")
+# else:
+#     print("ERRRRRRRRRRRROR!")
 
-# if operation == 'max':
-#     max = num1
-#     if num2 > max:
-#         max = num2
-#     if num3 > max:
-#         max = num3
-#     print(f"Max number = {max}")
-# elif operation == 'min':
-#     min = num1
-#     if num2 < min:
-#         min = num2
-#     if num3 < min:
-#         min = num3
-#     print(f"Max number = {min}")
-# elif operation == 'avg':
-#     average = (num1 + num2 + num3) / 3
-#     print(f"Average = {average}")
 
-# ------------------------------------------------------------------
+'''Користувач вводить із клавіатури довжину лінії та символ для заповнення лінії. Потрібно відобразити на екрані горизонтальну 
+лінію із введеного символу, вказаної довжини.
 
-'''Task 3
-Користувач вводить із клавіатури кількість метрів. Залежно від вибору користувача програма 
-конвертує метри в милі, дюйми або ярди.'''     
-    
-meters = int(input("Enter meters: "))
-operation = input("Enter an operation ('miles', 'inches' or 'yards'): ")
+Наприклад, якщо було введено 5 і &, тоді виведення на екран буде таким:'''
 
-if operation == 'miles':
-    miles = meters / 1609
-    print(f"Meters to miles: {meters} = {miles}")
-elif operation == 'inches':
-    inches = meters * 39.37
-    print(f"Meters to inches: {meters} = {inches}")
-elif operation == 'yards':
-    yards = meters * 1.094
-    print(f"Meters to yards: {meters} = {yards}")
+# symbol = input("Enter a symbol: ")
+# number = int(input("Enter the number: "))
 
+# if number == 1:
+#     print(f"{symbol}")
+# elif number == 2:
+#     print(f"{symbol}{symbol}")
+# elif number == 3:
+#     print(f"{symbol}{symbol}{symbol}")
+# elif number == 4:
+#     print(f"{symbol}{symbol}{symbol}{symbol}")
+# elif number == 5:
+#     print(f"{symbol}{symbol}{symbol}{symbol}{symbol}")
+# else:
+#     print("ERRRRRRRRRRRROR!")
+
+'''Користувач із клавіатури вводить кількість годин. Якщо отримане значення знаходиться в діапазоні від 0 до 6, 
+потрібно вивести напис "Good Night", якщо в діапазоні від 6 до 13 — "Good Morning", якщо в діапазоні від 13 до 17 — "Good Day",
+якщо в діапазоні від 17 до 0 — "Good Evening". Верхня межа діапазону не враховується. Наприклад, число 6 входить до діапазону
+від 6 до 13.'''
+
+time = int(input("Enter an hour: "))
+if time >= 0 and time < 6:
+    print("Good Night!")
+elif time >= 6 and time < 13:
+    print("Good Morning!")
+elif time >= 13 and time < 17:
+    print("Good Day!")
+elif time >= 17 and time < 24:
+    print("Good Evening!")
+else:
+    print("ERROR!")
