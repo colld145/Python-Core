@@ -120,4 +120,4 @@ for i in range(len(list)):
     if list[i] == number:
         counter+=1
 
-print(f"Number {number} in list {counter} times.")
+print(f"Number {number} in list {counter} times")
