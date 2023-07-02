@@ -43,8 +43,8 @@ for i in symbols_lists:
     for char in symbols_lists[0]:
         is_common = True
 
-        for file_name in symbols_lists[1:]:
-            if char not in file_name:
+        for list in symbols_lists[1:]:
+            if char not in list:
                 is_common = False
                 break
 
