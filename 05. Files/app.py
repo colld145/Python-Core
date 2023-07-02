@@ -5,7 +5,7 @@
 
 # texts = []
 # while True:
-#     # We enter text1.txt and text2.txt
+#     # For example enter text1.txt and text2.txt
 #     input_text = input("Enter a file name: ")
 #     if input_text == 'quit':
 #         break
@@ -29,7 +29,7 @@
 
 symbols_lists = []
 while True:
-    input_text = input("Enter a file name: ") # We enter symbols1.txt, symbols2.txt and symbols3.txt
+    input_text = input("Enter a file name: ") # For example enter symbols1.txt, symbols2.txt and symbols3.txt
     if input_text == 'quit':
         break
     file = open(f"{input_text}", 'r+')
