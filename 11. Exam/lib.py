@@ -2,10 +2,44 @@
 # Application's Library
 
 
+import csv
+
+def read_file():
+    try:
+        file = open("database.csv", "r")
+        csvreader = csv.reader(file)
+        return csvreader
+        file.close()
+    except Exception as error:
+        print(f"Error: {error}")
+
+
+def write_file(database):
+    try:
+        file = open("database.csv", "w")
+        for row in database:
+            for item in row:
+                if item == row[-1]:
+                    file.writelines(f"{item}")
+                    break
+                file.writelines(f"{item},")
+            file.writelines("\n")
+        file.close()
+    except Exception as error:
+        print(f"Error: {error}")
+
+
 database = []
+csvreader = read_file()
+
+
+def create_database(csvreader, database):
+    for item in csvreader:
+        database.append(item)
 
 
 def menu():
+    create_database(csvreader, database)
     while True:
         print("1. Add item\n2. Print items\n3. Edit item\n4. Remove item\n5. Search item\n\n0. Exit\n")
         choice = input("Enter a choice: ")
@@ -21,10 +55,14 @@ def menu():
             search_item(database)
         elif choice == "0":
             break
+        write_file(database)
     
 
 def add_item(database):
-    number = len(database) + 1
+    i = 0
+    for item in database:
+        i+=1
+    number = str(i+1)
     name = input("Enter an item name: ")
     producer = input("Enter an item producer: ")
     price = input("Enter an item price: ")
@@ -78,3 +116,6 @@ def search_item(database):
             if search_name in item:
                 print(f"{i}. Name: {item[0]}\nProducer: {item[1]}\nPrice: {item[2]}\n")
             i+=1
+    
+
+
