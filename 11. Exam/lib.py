@@ -5,6 +5,9 @@
 import csv
 import time
 import os
+from datetime import date
+from tabulate import tabulate
+
 
 def read_file():
     try:
@@ -38,54 +41,28 @@ csvreader = read_file()
 
 def create_database(csvreader, database):
     for item in csvreader:
-        item[3] = int(item[3]) # Change data type for price
+        item[3] = int(item[3]) # Change price data type
         database.append(item)
 
-
-def waiting():
-    bar = [
-    "[        ]",
-    "[=       ]",
-    "[===     ]",
-    "[====    ]",
-    "[=====   ]",
-    "[======  ]",
-    "[======= ]",
-    "[========]",
-    "[ =======]",
-    "[  ======]",
-    "[   =====]",
-    "[    ====]",
-    "[     ===]",
-    "[      ==]",
-    "[       =]",
-    "[        ]",
-    "[        ]"
-    ]
-    i = 0
-
-    while i <= 50:
-        print(f"\t    {bar[i % len(bar)]}", end="\r")
-        time.sleep(0.05)
-        i += 1
-    
 
 def menu():
     create_database(csvreader, database)
     exit = False
     while not exit:
-        print("----------------------------------")
+        numbering(database)
+        print("\n. . .")
         print("\t- 1. Add item -\n\t- 2. Print items -\n\t- 3. Edit item -\n\t- 4. Remove item -\n\t- 5. Search item -\n\n\t- 0. Exit -\n")
         choice = input(">> ")
-        print("----------------------------------")
         if choice == "1":
             add_item(database)
         elif choice == "2":
-            waiting()
-            print_all_items(database)
+            print_database(database)
         elif choice == "3":
-            edit_item(database)
+            print_database(database)
+            search = input("Enter a number of item to edit: ")
+            edit_item(database, search)
         elif choice == "4":
+            # It's going to be print and search!!
             remove_item(database)
         elif choice == "5":
             search_item(database)
@@ -103,22 +80,18 @@ def add_item(database):
     name = input("Enter an item name: ")
     producer = input("Enter an item producer: ")
     price = int(input("Enter an item price: "))
-    item = [number, name, producer, price]
+    product_group = input("Enter an item product group: ")
+    come_date = date.today()
+    life_term = input("Enter an item life term: ")
+    item = [number, name, producer, price, product_group, come_date, life_term]
     database.append(item)
 
 
-def print_all_items(database):
-    for item in database:
-        print_item(item)
+def print_database(item):
+    print(tabulate(item, headers=["№", "Name", "Producer", "Price", "Group", "Come date", "Life term"]))
 
 
-def print_item(item):
-    print(f"{item[0]}. Name: {item[1]}\nProducer: {item[2]}\nPrice: {item[3]}\n")
-
-
-def edit_item(database):
-    print_all_items(database)
-    choice = input("Enter a number of item to edit: ")
+def edit_item(database, choice):
     for item in database:
         if item[0] == choice:
             editing = input("1. Name\n2. Producer\n3. Price\n\nEnter an element to edit: ")
@@ -134,7 +107,7 @@ def edit_item(database):
 
 
 def remove_item(database):
-    print_all_items(database)
+    print_database(database)
     deleting = int(input("Enter a number of item to remove: "))
     i = 1
     for item in database:
@@ -143,29 +116,51 @@ def remove_item(database):
         i+=1
 
 
+def numbering(database):
+    i = 1
+    for item in database:
+        item[0] = i
+        i+=1
+
+
+def search_by_name(database, search_name):
+    search_list = []
+    for item in database:
+            if search_name in item:
+                search_list.append(item)
+    return search_list
+
+
+def search_by_producer(database, search_producer):
+    search_list = []
+    for item in database:
+        if search_producer in item:
+            search_list.append(item)
+    return search_list
+
+
+def search_by_price(database, start, finish):
+    search_list = []
+    for item in database:
+        if item[3] >= start and item[3] <= finish:
+             search_list.append(item)
+    return search_list
+
+
 def search_item(database):
     search_type = input("1. Search by name\n2. Search by producer\n3. Search by price\n\nEnter a type of search: ")
-    i = 1
     if search_type == "1":
         search_name = input("Enter a name to search: ")
-        print("\nRESULT: ")
-        for item in database:
-            if search_name in item:
-                print_item(item)
-            i+=1
+        print(f"\n*** Search by Name '{search_name}' - RESULT: ")
+        print_database(search_by_name(database, search_name))
     elif search_type == "2":
         search_producer = input("Enter a producer to search: ")
-        print("\nRESULT: ")
-        for item in database:
-            if search_producer in item:
-                print_item(item)
-            i+=1
+        print(f"\n*** Search by Producer '{search_producer}' - RESULT: ")
+        print_database(search_by_producer(database, search_producer))
     elif search_type == "3":
         start = int(input("Enter a start of range: "))
         finish = int(input("Enter a finish of range: "))
-        print("\nRESULT: ")
-        for item in database:
-            if item[3] >= start and item[3] <= finish:
-                print_item(item)
+        print(f"\n*** Search by Price '{start} - {finish}' - RESULT: ")
+        print_database(search_by_price(database, start, finish))
 
 
