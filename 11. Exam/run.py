@@ -1,8 +1,8 @@
-from lib import menu
+from menu import menu
 
 
 # ================================
-# Application's Start 
+# Application's Start
 menu()
 
 """

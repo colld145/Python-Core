@@ -35,47 +35,21 @@ def write_file(database):
         print(f"Error: {error}")
 
 
-database = []
-csvreader = read_file()
-
-
-def create_database(csvreader, database):
+def create_database():
+    csvreader = read_file()
+    database = []
     for item in csvreader:
         item[3] = int(item[3])  # Change price data type
         database.append(item)
+    return database
 
 
-def menu():
-    create_database(csvreader, database)
-    exit = False
-    while not exit:
-        numbering(database)
-        print("\n. . .")
-        print(
-            "\t- 1. Add item\n\t- 2. Print items\n\t- 3. Edit item\n\t- 4. Remove item\n\t- 5. Search item\n\n\t- 0. Exit\n"
-        )
-        choice = input(">> ")
-        if choice == "1":
-            add_item(database)
-        elif choice == "2":
-            print_database(database)
-        elif choice == "3":
-            print_database(database)
-            edit = int(input("Enter a number of item to edit: "))
-            edit_item(database, edit)
-        elif choice == "4":
-            print_database(database)
-            delete = int(input("Enter a number of item to delete: "))
-            remove_item(database, delete)
-        elif choice == "5":
-            search = input(
-                "1. Search by name\n2. Search by producer\n3. Search by price\n\nEnter a type of search: "
-            )
-            search_item(database, search)
-        elif choice == "0":
-            exit = True
+def sort_by_price(item):
+    return item[3]
 
-    write_file(database)
+
+def sort_by_group(item):
+    return item[4]
 
 
 def add_item(database):
@@ -139,6 +113,9 @@ def edit_item(database, choice):
             elif editing == "3":
                 new_price = input("Enter a new price: ")
                 item[3] = new_price
+            elif editing == "4":
+                new_group = input("Enter a new group: ")
+                item[4] = new_group
 
 
 def remove_item(database, choice):
@@ -172,6 +149,22 @@ def search_by_price(database, start, finish):
     return search_list
 
 
+def search_by_date(database, date):
+    search_list = []
+    for item in database:
+        if item[5] == date:
+            search_list.append(item)
+    return search_list
+
+
+def search_by_life_term(database, date):
+    search_list = []
+    for item in database:
+        if item[6] == date:
+            search_list.append(item)
+    return search_list
+
+
 def search_item(database, choice):
     if choice == "1":
         search_name = input("Enter a name to search: ")
@@ -186,3 +179,21 @@ def search_item(database, choice):
         finish = int(input("Enter a finish of range: "))
         print(f"\n*** Search by Price '{start} - {finish}' - RESULT: ")
         print_database(search_by_price(database, start, finish))
+    elif choice == "4":
+        search_group = input("Enter a group to search: ")
+        print(f"\n*** Search by Group '{search_group}' - RESULT: ")
+        print_database(search(database, search_group))
+    elif choice == "5":
+        search_day = input("Enter a day to search: ")
+        search_month = input("Enter a month to search: ")
+        search_year = input("Enter a year to search: ")
+        date = f"{search_year}-{search_month}-{search_day}"
+        print(f"\n*** Search by Come date '{date}' - RESULT: ")
+        print_database(search_by_date(database, date))
+    elif choice == "6":
+        search_day = input("Enter a day to search: ")
+        search_month = input("Enter a month to search: ")
+        search_year = input("Enter a year to search: ")
+        date = f"{search_year}-{search_month}-{search_day}"
+        print(f"\n*** Search by Life term '{date}' - RESULT: ")
+        print_database(search_by_life_term(database, date))
