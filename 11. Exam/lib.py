@@ -102,7 +102,7 @@ def edit_item(database, choice):
     for item in database:
         if item[0] == choice:
             editing = input(
-                "1. Name\n2. Producer\n3. Price\n\nEnter an element to edit: "
+                "1. Name\n2. Producer\n3. Price\n4. Group\n\nEnter an element to edit: "
             )
             if editing == "1":
                 new_name = input("Enter a new name: ")
@@ -157,13 +157,24 @@ def search_by_date(database, date):
     return search_list
 
 
+# def search_by_life_term(database, date):
+#     search_list = []
+#     for item in database:
+#         if item[6] == date:
+#             search_list.append(item)
+#     return search_list
+
+
 def search_by_life_term(database, date):
     search_list = []
     for item in database:
-        if item[6] == date:
+        if item[6] < date:
             search_list.append(item)
     return search_list
 
+
+
+today = date.today()
 
 def search_item(database, choice):
     if choice == "1":
@@ -191,9 +202,29 @@ def search_item(database, choice):
         print(f"\n*** Search by Come date '{date}' - RESULT: ")
         print_database(search_by_date(database, date))
     elif choice == "6":
-        search_day = input("Enter a day to search: ")
-        search_month = input("Enter a month to search: ")
-        search_year = input("Enter a year to search: ")
-        date = f"{search_year}-{search_month}-{search_day}"
-        print(f"\n*** Search by Life term '{date}' - RESULT: ")
-        print_database(search_by_life_term(database, date))
+        # search_day = input("Enter a day to search: ")
+        # search_month = input("Enter a month to search: ")
+        # search_year = input("Enter a year to search: ")
+        # date = f"{search_year}-{search_month}-{search_day}"
+        # print(f"\n*** Search by Life term '{date}' - RESULT: ")
+        # print_database(search_by_life_term(database, date))
+        # -----------------------------------------------------
+        deadline_input = input("Enter a date to search deadline: ")
+        deadline_input = deadline_input.split()
+        deadline_number = int(deadline_input[0])
+        if deadline_input[1] == "day" or deadline_input[1] == "days":
+            deadline_date = today
+            # deadline_date = deadline_date + timedelta(days=deadline_number)
+            for i in range(deadline_number):
+                deadline_date = deadline_date + timedelta(days=1)
+        if deadline_input[1] == "week" or deadline_input[1] == "weeks":
+            deadline_date = today
+            deadline_date = deadline_date + timedelta(weeks=deadline_number)
+        if deadline_input[1] == "month" or deadline_input[1] == "months":
+            deadline_number = deadline_number * 30
+            deadline_date = today
+        for i in range(deadline_number):
+            deadline_date = deadline_date + timedelta(days=1)
+        deadline_date = str(deadline_date)
+        print(f"\n*** Search by Life term '{deadline_date}' - RESULT: ")
+        print_database(search_by_life_term(database, deadline_date))
