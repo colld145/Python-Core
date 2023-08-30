@@ -22,15 +22,17 @@ def menu():
             search_item(database, search)
         elif choice == "3":
             add_item(database)
-
+            write_file(database)
         elif choice == "4":
             print_database(database)
             edit = int(input("\n\n0. Back\n\nEnter a number of item to edit: "))
             edit_item(database, edit)
+            write_file(database)
         elif choice == "5":
             print_database(database)
             delete = int(input("\n\n0. Back\n\nEnter a number of item to delete: "))
             remove_item(database, delete)
+            write_file(database)
         elif choice == "6":
             choice = input(
                 "\nSORT:\n1. by Price\n2. by Group\n\n0. Back\n\nEnter a choice: "
